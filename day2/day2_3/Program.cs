@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace day2_2_review // Late Binding w/ virtual-override
+namespace day2_3 // Late Binding w/ virtual-override & Refactoring
 {
     class Program
     {
@@ -110,7 +110,7 @@ namespace day2_2_review // Late Binding w/ virtual-override
             }
             public Animal this[int idx]
             {
-                get 
+                get
                 {
                     if (idx < 0 || idx >= AnimalMenuList.Count)
                     {
