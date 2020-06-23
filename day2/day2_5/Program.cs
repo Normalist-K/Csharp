@@ -104,13 +104,33 @@ namespace day2_5
             return new FreeLine();
         }
     }
-
+    class ToolBarMenu
+    {
+        public iShape Menu()
+        {
+            for (int i = 0; i < ShapeMenuList.Count; i++)
+            {
+                Console.WriteLine("{0}. {1} 선택", i + 1, ShapeMenuList[i].GetShapeName());
+            }
+            int iSelShape = int.Parse(Console.ReadLine());
+            if (iSelShape > 0 && iSelShape <= ShapeMenuList.Count)
+            {
+                return ShapeMenuList[iSelShape - 1];
+            }
+            else
+            {
+                return null;
+            }
+        }
+        List<iShape> ShapeMenuList = new List<iShape>() { new Line(), new Rectangle(), new Triangle(), new Circle(), new FreeLine() };
+    }
     class Program
     {
         static void Main(string[] args)
         {
             List<iShape> ShapeList = new List<iShape>();
-            List<iShape> ShapeMenuList = new List<iShape>() { new Line(), new Rectangle(), new Triangle(), new Circle(), new FreeLine() };
+            ToolBarMenu toolBarMenu = new ToolBarMenu();
+
             int iChoice = 1;
             iShape selItem = null;
             while (iChoice != 0)
@@ -124,19 +144,7 @@ namespace day2_5
                 {
                     case 1:
                         {
-                            for (int i = 0; i < ShapeMenuList.Count; i++)
-                            {
-                                Console.WriteLine("{0}. {1} 선택", i + 1, ShapeMenuList[i].GetShapeName());
-                            }
-                            int iSelShape = int.Parse(Console.ReadLine());
-                            if (iSelShape > 0 && iSelShape <= ShapeMenuList.Count)
-                            {
-                                selItem = ShapeMenuList[iSelShape - 1];
-                            }
-                            else
-                            {
-                                selItem = null;
-                            }
+                            toolBarMenu.Menu();
                         }
                         break;
                     case 2:
