@@ -124,13 +124,10 @@ namespace day2_5
         }
         List<iShape> ShapeMenuList = new List<iShape>() { new Line(), new Rectangle(), new Triangle(), new Circle(), new FreeLine() };
     }
-    class Program
+    class ShapeMgr
     {
-        static void Main(string[] args)
+        public void Menu()
         {
-            List<iShape> ShapeList = new List<iShape>();
-            ToolBarMenu toolBarMenu = new ToolBarMenu();
-
             int iChoice = 1;
             iShape selItem = null;
             while (iChoice != 0)
@@ -143,32 +140,44 @@ namespace day2_5
                 switch (iChoice)
                 {
                     case 1:
-                        {
-                            toolBarMenu.Menu();
-                        }
+                        selItem = toolBarMenu.Menu();
                         break;
                     case 2:
-                        if (selItem != null)
-                        {
-                            ShapeList.Add(selItem.Copy());
-                        }
-                        else
-                        {
-                            Console.WriteLine("도형을 선택하세요.");
-                        }
+                        InsertShape(selItem);
                         break;
                     case 3:
-                        {
-                            for (int i = 0; i < ShapeList.Count; i++)
-                            {
-                                ShapeList[i].Draw();
-                            }
-                        }
+                        DrawAllShape();
                         break;
-
                 }
             }
-            
+        }
+        private void InsertShape(iShape selItem)
+        {
+            if (selItem != null)
+            {
+                ShapeList.Add(selItem.Copy());
+            }
+            else
+            {
+                Console.WriteLine("도형을 선택하세요.");
+            }
+        }
+        private void DrawAllShape()
+        {
+            for (int i = 0; i < ShapeList.Count; i++)
+            {
+                ShapeList[i].Draw();
+            }
+        }
+        List<iShape> ShapeList = new List<iShape>();
+        ToolBarMenu toolBarMenu = new ToolBarMenu();
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            ShapeMgr m = new ShapeMgr();
+            m.Menu();
         }
     }
 }
