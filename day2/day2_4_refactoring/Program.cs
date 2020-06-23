@@ -102,14 +102,10 @@ namespace Test6
             return new Tiger();
         }
     }
-    class Program
+    class AnimalMgr
     {
-        static void Main(string[] args)
+        public void Menu()
         {
-            List<Animal> AnimalList = new List<Animal>();
-            List<Animal> AnimalMenuList = new List<Animal>() { new Dog(), new Cat(), new Pig(), new Horse(), new Tiger() };
-            List<Animal> AnimalMenuBufferList = new List<Animal>();
-
             int iChoice = 1;
             while (iChoice != 0)
             {
@@ -141,6 +137,18 @@ namespace Test6
             {
                 AnimalList[i].Speak();
             }
+        }
+
+        List<Animal> AnimalList = new List<Animal>();
+        List<Animal> AnimalMenuList = new List<Animal>() { new Dog(), new Cat(), new Pig(), new Horse(), new Tiger() };
+        List<Animal> AnimalMenuBufferList = new List<Animal>();
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            AnimalMgr m = new AnimalMgr();
+            m.Menu();
         }
     }
 }
