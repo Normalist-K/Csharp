@@ -1,0 +1,7 @@
+C:\work\day2\day2_2_review\bin\Debug\day2_2_review.exe.config
+C:\work\day2\day2_2_review\bin\Debug\day2_2_review.exe
+C:\work\day2\day2_2_review\bin\Debug\day2_2_review.pdb
+C:\work\day2\day2_2_review\obj\Debug\day2_2_review.csproj.CoreCompileInputs.cache
+C:\work\day2\day2_2_review\obj\Debug\day2_2_review.exe
+C:\work\day2\day2_2_review\obj\Debug\day2_2_review.pdb
+C:\work\day2\day2_2_review\obj\Debug\day2_2_review.csprojAssemblyReference.cache
