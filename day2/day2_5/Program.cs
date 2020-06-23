@@ -78,7 +78,49 @@ namespace day2_5
     {
         static void Main(string[] args)
         {
+            List<iShape> ShapeList = new List<iShape>();
+            List<iShape> ShapeMenuList = new List<iShape>() { new Line(), new Rectangle(), new Triangle(), new Circle() };
+            int iChoice = 1;
+            iShape selItem = null;
+            while (iChoice != 0)
+            {
+                Console.WriteLine("1. 라인 선택");
+                Console.WriteLine("2. 삼각형 선택");
+                Console.WriteLine("3. 사각형 선택");
+                Console.WriteLine("4. 원형 선택");
+                Console.WriteLine("5. 그림판에 그리기");
+                Console.WriteLine("6. 그림판 내용 보기");
+                iChoice = int.Parse(Console.ReadLine());
 
+                switch (iChoice)
+                {
+                    case 1:
+
+                        break;
+                    case 2:
+
+                        break;
+                    case 3:
+
+                        break;
+                    case 4:
+                        selItem = ShapeMenuList[iChoice - 1];
+                        break;
+                    case 5:
+                        ShapeList.Add(selItem.Copy());
+                        break;
+                    case 6:
+                        {
+                            for (int i = 0; i < ShapeList.Count; i++)
+                            {
+                                ShapeList[i].Draw();
+                            }
+                        }
+                        break;
+
+                }
+            }
+            
         }
     }
 }
