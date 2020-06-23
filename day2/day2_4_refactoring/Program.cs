@@ -115,10 +115,6 @@ namespace Test6
             Console.WriteLine("{0}. 메뉴추가", i + 2);
             return int.Parse(Console.ReadLine());
         }
-        public void RemoveAt(int iIndex)
-        {
-            AnimalMenuList.RemoveAt(iIndex);
-        }
         public Animal this[int iIndex]
         {
             get { return AnimalMenuList[iIndex]; }
@@ -127,7 +123,21 @@ namespace Test6
         {
             get { return AnimalMenuList.Count; }
         }
+        public void RemoveMenu()
+        {
+            AnimalMenuBufferList.Add(AnimalMenuList[0]);
+            AnimalMenuList.RemoveAt(0);
+        }
+        public void AppendMenu()
+        {
+            if (AnimalMenuBufferList.Count > 0)
+            {
+                AnimalMenuList.Insert(0, AnimalMenuBufferList[0]);
+                AnimalMenuBufferList.RemoveAt(0);
+            }
+        }
         List<Animal> AnimalMenuList = new List<Animal>() { new Dog(), new Cat(), new Pig(), new Horse(), new Tiger() };
+        List<Animal> AnimalMenuBufferList = new List<Animal>();
     }
     class AnimalMgr
     {
@@ -144,13 +154,11 @@ namespace Test6
                 }
                 else if (iChoice == MenuMgr.Count + 1)
                 {
-                    AnimalMenuBufferList.Add(MenuMgr[0]);
-                    MenuMgr.RemoveAt(0);
+                    MenuMgr.RemoveMenu();
                 }
-                else if (iChoice == MenuMgr.Count + 2 && AnimalMenuBufferList.Count > 0)
+                else if (iChoice == MenuMgr.Count + 2)
                 {
-                    MenuMgr.Insert(0, AnimalMenuBufferList[0]);
-                    AnimalMenuBufferList.RemoveAt(0);
+                    MenuMgr.AppendMenu();
                 }
             }
             for (int i = 0; i < AnimalList.Count; i++)
@@ -161,7 +169,6 @@ namespace Test6
 
         List<Animal> AnimalList = new List<Animal>();
         AnimalMenuMgr MenuMgr = new AnimalMenuMgr();
-        List<Animal> AnimalMenuBufferList = new List<Animal>();
     }
     class Program
     {
