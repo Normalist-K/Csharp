@@ -6,70 +6,70 @@ using System.Threading.Tasks;
 
 namespace day2_5
 {
-    abstract class Shape
+    interface iShape
     {
-        public abstract void Draw();
-        public abstract string GetShapeName();
-        public abstract Shape Copy();
+        void Draw();
+        string GetShapeName();
+        iShape Copy();
         
     }
-    class Line : Shape
+    class Line : iShape
     {
-        public override void Draw()
+        void iShape.Draw()
         {
             Console.WriteLine("라인 그리기");
         }
-        public override string GetShapeName()
+        string iShape.GetShapeName()
         {
             return "라인";
         }
-        public override Shape Copy()
+        iShape iShape.Copy()
         {
             return new Line();
         }
 
     }
-    class Triangle : Shape
+    class Triangle : iShape
     {
-        public override void Draw()
+        void iShape.Draw()
         {
             Console.WriteLine("삼각형 그리기");
         }
-        public override string GetShapeName()
+        string iShape.GetShapeName()
         {
             return "삼각형";
         }
-        public override Shape Copy()
+        iShape iShape.Copy()
         {
             return new Triangle();
         }
     }
-    class Rectangle : Shape
+    class Rectangle : iShape
     {
-         public override void Draw()
+         void iShape.Draw()
         {
             Console.WriteLine("사각형 그리기");
         }
-        public override string GetShapeName()
+        string iShape.GetShapeName()
         {
             return "사각형";
         }
-        public override Shape Copy()
+        iShape iShape.Copy()
         {
             return new Rectangle();
         }
     }
-    class Circle : Shape
+    class Circle : iShape
     {
-         public override void Draw()
+         void iShape.Draw()
         {
             Console.WriteLine("원형 그리기");
         }
-        public override string GetShapeName()
+        string iShape.GetShapeName()
         {
             return "원형";
         }
-        public override Shape Copy()
+        iShape iShape.Copy()
         {
             return new Circle();
         }
