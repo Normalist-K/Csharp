@@ -6,25 +6,16 @@ using System.Threading.Tasks;
 
 namespace Test6
 {
-    class Animal
+    abstract class Animal
     {
         public int AGE
         {
             get { return m_iAge; }
             set { m_iAge = value; }
         }
-        public virtual void Speak()
-        {
-            Console.WriteLine("Animal Speak!!!");
-        }
-        public virtual string GetAnimalName()
-        {
-            return "Animal";
-        }
-        public virtual Animal Copy()
-        {
-            return new Animal();
-        }
+        public abstract void Speak();
+        public abstract string GetAnimalName();
+        public abstract Animal Copy();
         private int m_iAge;
     }
     class Cat : Animal
