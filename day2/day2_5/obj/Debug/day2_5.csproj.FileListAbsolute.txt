@@ -1,0 +1,7 @@
+C:\Users\uvent\source\repos\Normalist-K\hustar2\day2\day2_5\bin\Debug\day2_5.exe.config
+C:\Users\uvent\source\repos\Normalist-K\hustar2\day2\day2_5\bin\Debug\day2_5.exe
+C:\Users\uvent\source\repos\Normalist-K\hustar2\day2\day2_5\bin\Debug\day2_5.pdb
+C:\Users\uvent\source\repos\Normalist-K\hustar2\day2\day2_5\obj\Debug\day2_5.csproj.CoreCompileInputs.cache
+C:\Users\uvent\source\repos\Normalist-K\hustar2\day2\day2_5\obj\Debug\day2_5.exe
+C:\Users\uvent\source\repos\Normalist-K\hustar2\day2\day2_5\obj\Debug\day2_5.pdb
+C:\Users\uvent\source\repos\Normalist-K\hustar2\day2\day2_5\obj\Debug\day2_5.csprojAssemblyReference.cache
