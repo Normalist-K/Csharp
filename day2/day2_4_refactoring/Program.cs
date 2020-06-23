@@ -106,7 +106,7 @@ namespace Test6
     {
         public int DispMenu()
         {
-            int i = 0;
+            int i;
             for (i = 0; i < AnimalMenuList.Count; i++)
             {
                 Console.WriteLine("{0}. {1}", i + 1, AnimalMenuList[i].GetAnimalName());
@@ -114,6 +114,18 @@ namespace Test6
             Console.WriteLine("{0}. 메뉴삭제", i + 1);
             Console.WriteLine("{0}. 메뉴추가", i + 2);
             return int.Parse(Console.ReadLine());
+        }
+        public void RemoveAt(int iIndex)
+        {
+            AnimalMenuList.RemoveAt(iIndex);
+        }
+        public Animal this[int iIndex]
+        {
+            get { return AnimalMenuList[iIndex]; }
+        }
+        public int Count // 포함
+        {
+            get { return AnimalMenuList.Count; }
         }
         List<Animal> AnimalMenuList = new List<Animal>() { new Dog(), new Cat(), new Pig(), new Horse(), new Tiger() };
     }
@@ -126,18 +138,18 @@ namespace Test6
             {
                 iChoice = MenuMgr.DispMenu();
 
-                if (iChoice > 0 && iChoice <= AnimalMenuList.Count)
+                if (iChoice > 0 && iChoice <= MenuMgr.Count)
                 {
-                    AnimalList.Add(AnimalMenuList[iChoice - 1].Copy());
+                    AnimalList.Add(MenuMgr[iChoice - 1].Copy());
                 }
-                else if (iChoice == AnimalMenuList.Count + 1)
+                else if (iChoice == MenuMgr.Count + 1)
                 {
-                    AnimalMenuBufferList.Add(AnimalMenuList[0]);
-                    AnimalMenuList.RemoveAt(0);
+                    AnimalMenuBufferList.Add(MenuMgr[0]);
+                    MenuMgr.RemoveAt(0);
                 }
-                else if (iChoice == AnimalMenuList.Count + 2 && AnimalMenuBufferList.Count > 0)
+                else if (iChoice == MenuMgr.Count + 2 && AnimalMenuBufferList.Count > 0)
                 {
-                    AnimalMenuList.Insert(0, AnimalMenuBufferList[0]);
+                    MenuMgr.Insert(0, AnimalMenuBufferList[0]);
                     AnimalMenuBufferList.RemoveAt(0);
                 }
             }
