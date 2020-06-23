@@ -6,20 +6,11 @@ using System.Threading.Tasks;
 
 namespace day2_5
 {
-    class Shape
+    abstract class Shape
     {
-        public virtual void Draw()
-        {
-            Console.WriteLine("Shape Draw...");
-        }
-        public virtual string GetShapeName()
-        {
-            return "Shape";
-        }
-        public virtual Shape Copy()
-        {
-            return new Shape();
-        }
+        public abstract void Draw();
+        public abstract string GetShapeName();
+        public abstract Shape Copy();
         
     }
     class Line : Shape
