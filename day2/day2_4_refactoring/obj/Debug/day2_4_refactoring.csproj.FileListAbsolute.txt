@@ -1,0 +1,6 @@
+C:\Users\uvent\source\repos\Normalist-K\hustar2\day2\day2_4_refactoring\bin\Debug\day2_4_refactoring.exe.config
+C:\Users\uvent\source\repos\Normalist-K\hustar2\day2\day2_4_refactoring\bin\Debug\day2_4_refactoring.exe
+C:\Users\uvent\source\repos\Normalist-K\hustar2\day2\day2_4_refactoring\bin\Debug\day2_4_refactoring.pdb
+C:\Users\uvent\source\repos\Normalist-K\hustar2\day2\day2_4_refactoring\obj\Debug\day2_4_refactoring.csproj.CoreCompileInputs.cache
+C:\Users\uvent\source\repos\Normalist-K\hustar2\day2\day2_4_refactoring\obj\Debug\day2_4_refactoring.exe
+C:\Users\uvent\source\repos\Normalist-K\hustar2\day2\day2_4_refactoring\obj\Debug\day2_4_refactoring.pdb

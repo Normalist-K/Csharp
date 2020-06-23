@@ -102,6 +102,21 @@ namespace Test6
             return new Tiger();
         }
     }
+    class AnimalMenuMgr
+    {
+        public int DispMenu()
+        {
+            int i = 0;
+            for (i = 0; i < AnimalMenuList.Count; i++)
+            {
+                Console.WriteLine("{0}. {1}", i + 1, AnimalMenuList[i].GetAnimalName());
+            }
+            Console.WriteLine("{0}. 메뉴삭제", i + 1);
+            Console.WriteLine("{0}. 메뉴추가", i + 2);
+            return int.Parse(Console.ReadLine());
+        }
+        List<Animal> AnimalMenuList = new List<Animal>() { new Dog(), new Cat(), new Pig(), new Horse(), new Tiger() };
+    }
     class AnimalMgr
     {
         public void Menu()
@@ -109,14 +124,7 @@ namespace Test6
             int iChoice = 1;
             while (iChoice != 0)
             {
-                int i = 0;
-                for (i = 0; i < AnimalMenuList.Count; i++)
-                {
-                    Console.WriteLine("{0}. {1}", i + 1, AnimalMenuList[i].GetAnimalName());
-                }
-                Console.WriteLine("{0}. 메뉴삭제", i + 1);
-                Console.WriteLine("{0}. 메뉴추가", i + 2);
-                iChoice = int.Parse(Console.ReadLine());
+                iChoice = MenuMgr.DispMenu();
 
                 if (iChoice > 0 && iChoice <= AnimalMenuList.Count)
                 {
@@ -140,7 +148,7 @@ namespace Test6
         }
 
         List<Animal> AnimalList = new List<Animal>();
-        List<Animal> AnimalMenuList = new List<Animal>() { new Dog(), new Cat(), new Pig(), new Horse(), new Tiger() };
+        AnimalMenuMgr MenuMgr = new AnimalMenuMgr();
         List<Animal> AnimalMenuBufferList = new List<Animal>();
     }
     class Program
