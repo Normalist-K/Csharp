@@ -26,6 +26,11 @@ namespace day4_1 // delegate
 
         static void Main(string[] args)
         {
+            DispFuncDelegate[] DispFuncArray = new DispFuncDelegate[3];
+            DispFuncArray[0] = DispArrow;
+            DispFuncArray[1] = DispStar;
+            DispFuncArray[2] = DispPlus;
+
             int iChoice = 1;
             while (iChoice != 0)
             {
@@ -34,19 +39,10 @@ namespace day4_1 // delegate
                 Console.WriteLine("2. DispPlus");
 
                 iChoice = int.Parse(Console.ReadLine());
-                switch (iChoice)
+                if (iChoice > 0 && iChoice <= DispFuncArray.Length)
                 {
-                    case 1:
-                        MyFunc(DispArrow);
-                        // DispArrow함수의 주소를 파라미터로 넣어줌
-                        break;
-                    case 2:
-                        MyFunc(DispStar);
-                        break;
-                    case 3:
-                        MyFunc(DispPlus);
-                        break;
-
+                    DispFuncArray[iChoice - 1]();
+                    // 배열의 i번째가 함수이름일 경우, 옆에 () 해주면 함수 실행
                 }
             }
         }
