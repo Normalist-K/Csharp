@@ -23,6 +23,7 @@ namespace day4_3
                 Console.WriteLine("{0}. {1}", i, sArray[i]);
             }
         }
+        public static
         
     }
     // string 같이 상속이 안되는 클래스는 extention을 사용
