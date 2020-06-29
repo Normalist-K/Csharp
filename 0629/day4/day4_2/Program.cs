@@ -8,7 +8,6 @@ namespace day4_2
 {
     class Program
     {
-        delegate void DecoDelegate();
         static void Main(string[] args)
         {
             // 익명 클래스
@@ -35,7 +34,8 @@ namespace day4_2
             Console.WriteLine("----------------------------------------------");
         }
 
-        static void DispFunc(int [] iArray, DecoDelegate HeaderFunc, DecoDelegate FooterFunc, DecoDelegate SepFunc)
+        static void DispFunc(int [] iArray, Action HeaderFunc, Action FooterFunc, Action SepFunc)
+            // void return하면 Action
         {
             HeaderFunc();
             for (int i = 0; i < iArray.Length; i++)
