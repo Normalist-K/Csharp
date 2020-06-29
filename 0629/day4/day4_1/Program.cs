@@ -9,6 +9,11 @@ namespace day4_1 // delegate
 {
     delegate void DispFuncDelegate();
     // class type, 변수로 함수의 주소가 들어감
+    class DispFuncClass
+    {
+        public string MenuString;
+        public DispFuncDelegate DeleFunc;
+    }
     class Program
     {
         static void DispArrow()
@@ -26,22 +31,22 @@ namespace day4_1 // delegate
 
         static void Main(string[] args)
         {
-            DispFuncDelegate[] DispFuncArray = new DispFuncDelegate[3];
-            DispFuncArray[0] = DispArrow;
-            DispFuncArray[1] = DispStar;
-            DispFuncArray[2] = DispPlus;
-
+            DispFuncClass[] DispFuncClassArray = new DispFuncClass[3] { 
+                new DispFuncClass() { MenuString = "DispArrow", DeleFunc=DispArrow }, 
+                new DispFuncClass() { MenuString = "DispStar", DeleFunc=DispStar }, 
+                new DispFuncClass() { MenuString = "DispPlus", DeleFunc=DispPlus }, 
+            };
             int iChoice = 1;
             while (iChoice != 0)
             {
-                Console.WriteLine("1. DispArrow");
-                Console.WriteLine("2. DispStar");
-                Console.WriteLine("2. DispPlus");
-
-                iChoice = int.Parse(Console.ReadLine());
-                if (iChoice > 0 && iChoice <= DispFuncArray.Length)
+                for (int i = 0; i < DispFuncClassArray.Length; i++)
                 {
-                    MyFunc(DispFuncArray[iChoice - 1]);
+                    Console.WriteLine("{0}.{1}", i + 1, DispFuncClassArray[i].MenuString);
+                }
+                iChoice = int.Parse(Console.ReadLine());
+                if (iChoice > 0 && iChoice <= DispFuncClassArray.Length)
+                {
+                    MyFunc(DispFuncClassArray[iChoice - 1].DeleFunc);
                 }
             }
         }
@@ -54,8 +59,9 @@ namespace day4_1 // delegate
                 DispFunc();
                 // 어떤 함수가 실행될 지는 실행시에 결정됨 -> late binding
                 // c/c++ 은 pointer로 late binding
-                // c#/java 는 pointer가 없으니까 delegate 활용
+                // c#/java 는 pointer가 없으니까 delegate 활용 (late binding하려고 virtual쓰기도 함)
             }
+            Console.WriteLine("");
         }
     }
 }
