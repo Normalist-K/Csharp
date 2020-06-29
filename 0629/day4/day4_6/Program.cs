@@ -19,9 +19,9 @@ namespace day4_6 // 회원관리 프로그램
         }
         public void PrintData()
         {
-            Console.Write("전화번호: {0}", TelNo);
-            Console.Write("이름: {0}", Name);
-            Console.Write("주소: {0}", Addr);
+            Console.WriteLine("전화번호: {0}", TelNo);
+            Console.WriteLine("이름: {0}", Name);
+            Console.WriteLine("주소: {0}", Addr);
         }
         public bool CompareTelNo(string tel)
         {
@@ -65,29 +65,29 @@ namespace day4_6 // 회원관리 프로그램
         }
         private void PrintAllMember()
         {
-            for (int i = 0; i < MemList.Count; i++)
-            {
-                MemList[i].PrintData();
-            }
+            //for (int i = 0; i < MemList.Count; i++)
+            //{
+            //    MemList[i].PrintData();
+            //}
             //같은 함수 간단하게
-            //MemList.ForEach(m => m.PrintData());
+            MemList.ForEach(m => m.PrintData());
         }
         private Member SearchMember(string strTelNo)
         {
-            for (int i = 0; i < MemList.Count; i++)
-            {
-                if (MemList[i].CompareTelNo(strTelNo))
-                {
-                    return MemList[i];
-                }
-            }
-            return null;
+            //for (int i = 0; i < MemList.Count; i++)
+            //{
+            //    if (MemList[i].CompareTelNo(strTelNo))
+            //    {
+            //        return MemList[i];
+            //    }
+            //}
+            //return null;
 
-            //return MemList.ForEach(m => m.CompareTelNo(strTelNo));
+            return MemList.Find(m => m.CompareTelNo(strTelNo));
         }
         private void SearchMember()
         {
-            Console.WriteLine("찾을 전화번호: ");
+            Console.Write("찾을 전화번호: ");
             string strTelNo = Console.ReadLine();
 
             Member m = SearchMember(strTelNo);
@@ -106,6 +106,8 @@ namespace day4_6 // 회원관리 프로그램
     {
         static void Main(string[] args)
         {
+            MemberMgr m = new MemberMgr();
+            m.Menu();
         }
     }
 }
