@@ -14,19 +14,26 @@ namespace day4_3
         {
             return s.Split(' ').Length;
         }
-    }
-    class Program
-    {
-        static void Main(string[] args)
+        public static void StringSplitPrint(this string s)
         {
-            string s = "홍길동 김길동 이길동 박길동";
-            Console.WriteLine("s.StringCount : {0}", s.StringCount());
             string[] sArray = s.Split(' ');
             // " " 은 뒤에 null이 붙어있음. ' ' 과 다름 주의
             for (int i = 0; i < sArray.Length; i++)
             {
                 Console.WriteLine("{0}. {1}", i, sArray[i]);
             }
+        }
+        
+    }
+    // string 같이 상속이 안되는 클래스는 extention을 사용
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string s = "홍길동 김길동 이길동 박길동";
+            Console.WriteLine("s.StringCount : {0}", s.StringCount());
+            s.StringSplitPrint();
         }
     }
 }
