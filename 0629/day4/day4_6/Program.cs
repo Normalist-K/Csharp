@@ -12,7 +12,7 @@ namespace day4_6 // 회원관리 프로그램
         {
 
         }
-        public static Member CreateObject(MemberMgr mMgr)
+        public static Member CreateObject(IMemberMgrForSearch mMgr)
         {
             Console.Write("전화번호: ");
             string strTelNo = Console.ReadLine();
@@ -33,6 +33,7 @@ namespace day4_6 // 회원관리 프로그램
             NewMember.InputData();
             return NewMember;
         }
+        // CreateObject로 관리하지 않으면, 먼저 new 하고 전화번호 비교 -> 이미 등록되어 있는 경우 계속해서 heap 메모리에 빈 객체가 쌓인다
         public bool InputData()
         {
             Console.Write("이름: ");
@@ -56,7 +57,12 @@ namespace day4_6 // 회원관리 프로그램
         private string Name;
         private string Addr;
     }
-    class MemberMgr
+    interface IMemberMgrForSearch
+    {
+        Member SearchMember(string strTelNo);
+    }
+    // virtual fn 과 비교해서 코드를 짤 수 없다 -> interface == pure virtual fn
+    class MemberMgr : IMemberMgrForSearch
     {
         public void Menu()
         {
