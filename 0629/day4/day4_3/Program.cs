@@ -29,11 +29,32 @@ namespace day4_3
 
     class Program
     {
+        static void DispInt(int i)
+        {
+            Console.WriteLine("i : {0}", i);
+        }
         static void Main(string[] args)
         {
-            string s = "홍길동 김길동 이길동 박길동";
-            Console.WriteLine("s.StringCount : {0}", s.StringCount());
-            s.StringSplitPrint();
+            List<int> iList = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            // iList.ForEach(DispInt);
+            
+            // 위 함수랑 같음, 익명 delegate 활용
+            iList.ForEach(delegate (int i)
+            {
+                Console.WriteLine("i : {0}", i);
+            });
+
+            // 람다식. 마찬가지로 위에 있는 함수랑 같음
+            iList.ForEach((int i) => Console.WriteLine("i : {0}", i));
+            
+            // int는 이미 iList로 알 수 있으니 빼도 상관없음
+            iList.ForEach((i) => Console.WriteLine("i : {0}", i));
+
+
+            for (int i = 0; i < iList.Count; i++)
+            {
+                Console.WriteLine("iList[{0}] : {1}", i, iList[i]);
+            }
         }
     }
 }
