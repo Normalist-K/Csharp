@@ -13,7 +13,8 @@ namespace day4_2
         {
             int[] iArray = new int[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
             DispFunc(iArray, Header, Footer, Seperator);
-            DispFunc(iArray, Empty, Empty, Empty);
+            DispFunc(iArray, Empty, Empty, delegate() { });
+            // Empty == delegate() { }
         }
         static void Empty() { }
         static void Header()
