@@ -13,6 +13,10 @@ namespace review
         {
             return i > 0;
         }
+        static bool MyPreFunc(int i)
+        {
+            return i == 5;
+        }
         static void Main(string[] args)
         {
             List<int> iList = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
@@ -31,8 +35,15 @@ namespace review
             Console.WriteLine("iList.All(MyAllFunc) : {0}", 
                 iList.All((i) => i > 0)
             );
+            Console.WriteLine("iList.Find(MyPreFunc) : {0}", iList.Find(MyPreFunc));
 
-
+            int iFindValue = int.Parse(Console.ReadLine());
+            Console.WriteLine("iList.Find(MyPreFunc) : {0}", iList.Find(delegate(int i)
+            {
+                return i == iFindValue;
+            }));
+            Console.WriteLine("iList.Find(MyPreFunc) : {0}", iList.Find((int i) => i == iFindValue));
+            Console.WriteLine("iList.Find(MyPreFunc) : {0}", iList.Find(i => i == iFindValue));
         }
     }
 }
