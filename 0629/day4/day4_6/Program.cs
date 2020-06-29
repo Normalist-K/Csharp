@@ -17,7 +17,7 @@ namespace day4_6 // 회원관리 프로그램
             Console.Write("주소: ");
             Addr = Console.ReadLine();
         }
-        public void PringData()
+        public void PrintData()
         {
             Console.Write("전화번호: {0}", TelNo);
             Console.Write("이름: {0}", Name);
@@ -43,10 +43,36 @@ namespace day4_6 // 회원관리 프로그램
         {
             for (int i = 0; i < MemList.Count; i++)
             {
-                MemList[i].PringData();
+                MemList[i].PrintData();
             }
             //같은 함수 간단하게
-            //MemList.ForEach(m => m.PringData());
+            //MemList.ForEach(m => m.PrintData());
+        }
+        private Member SearchMember(string strTelNo)
+        {
+            for (int i = 0; i < MemList.Count; i++)
+            {
+                if (MemList[i].CompareTelNo(strTelNo))
+                {
+                    return MemList[i];
+                }
+            }
+            return null;
+        }
+        private void SearchMember()
+        {
+            Console.WriteLine("찾을 전화번호: ");
+            string strTelNo = Console.ReadLine();
+
+            Member m = SearchMember(strTelNo);
+            if (m==null)
+            {
+                Console.WriteLine("찾으려는 데이터가 없습니다.");
+            }
+            else
+            {
+                m.PrintData();
+            }
         }
         private List<Member> MemList = new List<Member>();
     }
