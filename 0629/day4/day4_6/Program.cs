@@ -8,11 +8,15 @@ namespace day4_6 // 회원관리 프로그램
 {
     class Member
     {
-        public bool InputData(MemberMgr mMgr)
+        private Member()
+        {
+
+        }
+        public static Member CreateObject(MemberMgr mMgr)
         {
             Console.Write("전화번호: ");
-            TelNo = Console.ReadLine();
-            Member m = mMgr.SearchMember(TelNo);
+            string strTelNo = Console.ReadLine();
+            Member m = mMgr.SearchMember(strTelNo);
             // MemberMgr에 있는 SearchMember 메서드를 쓰기 위해 parameter로 받아옴
             if (m != null)
             {
@@ -21,8 +25,16 @@ namespace day4_6 // 회원관리 프로그램
                 Console.WriteLine("---------------------------------");
                 m.PrintData();
                 Console.WriteLine("---------------------------------");
-                return false;
+                return null;
             }
+
+            Member NewMember = new Member();
+            NewMember.TelNo = strTelNo;
+            NewMember.InputData();
+            return NewMember;
+        }
+        public bool InputData()
+        {
             Console.Write("이름: ");
             Name = Console.ReadLine();
             Console.Write("주소: ");
@@ -73,8 +85,8 @@ namespace day4_6 // 회원관리 프로그램
         private void InsertMember()
             //                    MemberMgr this
         {
-            Member m1 = new Member();
-            if (m1.InputData(this))
+            Member m1 = Member.CreateObject(this);
+            if (m1 != null)
             {
                 MemList.Add(m1);
             }
