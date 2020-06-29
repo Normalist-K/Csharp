@@ -19,11 +19,36 @@ namespace day4_1 // delegate
         {
             Console.Write("*");
         }
+        static void DispPlus()
+        {
+            Console.Write("+");
+        }
 
         static void Main(string[] args)
         {
-            MyFunc(DispArrow);
-            // DispArrow함수의 주소를 파라미터로 넣어줌
+            int iChoice = 1;
+            while (iChoice != 0)
+            {
+                Console.WriteLine("1. DispArrow");
+                Console.WriteLine("2. DispStar");
+                Console.WriteLine("2. DispPlus");
+
+                iChoice = int.Parse(Console.ReadLine());
+                switch (iChoice)
+                {
+                    case 1:
+                        MyFunc(DispArrow);
+                        // DispArrow함수의 주소를 파라미터로 넣어줌
+                        break;
+                    case 2:
+                        MyFunc(DispStar);
+                        break;
+                    case 3:
+                        MyFunc(DispPlus);
+                        break;
+
+                }
+            }
         }
 
         static void MyFunc(DispFuncDelegate DispFunc)
@@ -32,6 +57,9 @@ namespace day4_1 // delegate
             {
                 Thread.Sleep(500);
                 DispFunc();
+                // 어떤 함수가 실행될 지는 실행시에 결정됨 -> late binding
+                // c/c++ 은 pointer로 late binding
+                // c#/java 는 pointer가 없으니까 delegate 활용
             }
         }
     }
