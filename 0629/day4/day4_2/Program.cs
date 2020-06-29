@@ -11,10 +11,15 @@ namespace day4_2
         delegate void DecoDelegate();
         static void Main(string[] args)
         {
+            // 익명 클래스
+            var c = new { AGE = 10, NAME = "홍길동" };
+            Console.WriteLine("c.NAME = {0}, c.AGE = {1}", c.NAME, c.AGE);
+
             int[] iArray = new int[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
             DispFunc(iArray, Header, Footer, Seperator);
             DispFunc(iArray, Empty, Empty, delegate() { });
-            // Empty == delegate() { }
+            // Empty == delegate() { }   <- 익명 delegate
+            // 한 번 밖에 사용하지 않을거면 익명으로 만드는게 좋아
         }
         static void Empty() { }
         static void Header()
