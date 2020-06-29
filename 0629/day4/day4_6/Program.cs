@@ -33,6 +33,30 @@ namespace day4_6 // 회원관리 프로그램
     }
     class MemberMgr
     {
+        public void Menu()
+        {
+            int iChoice = 1;
+            while (iChoice != 0)
+            {
+                Console.WriteLine("1. 회원 등록");
+                Console.WriteLine("2. 회원 출력");
+                Console.WriteLine("3. 회원 검색");
+                iChoice = int.Parse(Console.ReadLine());
+                switch (iChoice)
+                {
+                    case 1:
+                        InsertMember();
+                        break;
+                    case 2:
+                        PrintAllMember();
+                        break;
+                    case 3:
+                        SearchMember();
+                        break;
+                    
+                }
+            }
+        }
         private void InsertMember()
         {
             Member m1 = new Member();
@@ -58,6 +82,8 @@ namespace day4_6 // 회원관리 프로그램
                 }
             }
             return null;
+
+            //return MemList.ForEach(m => m.CompareTelNo(strTelNo));
         }
         private void SearchMember()
         {
