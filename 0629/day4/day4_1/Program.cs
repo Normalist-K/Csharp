@@ -41,8 +41,7 @@ namespace day4_1 // delegate
                 iChoice = int.Parse(Console.ReadLine());
                 if (iChoice > 0 && iChoice <= DispFuncArray.Length)
                 {
-                    DispFuncArray[iChoice - 1]();
-                    // 배열의 i번째가 함수이름일 경우, 옆에 () 해주면 함수 실행
+                    MyFunc(DispFuncArray[iChoice - 1]);
                 }
             }
         }
