@@ -72,6 +72,9 @@ namespace day4_6 // 회원관리 프로그램
                 Console.WriteLine("1. 회원 등록");
                 Console.WriteLine("2. 회원 출력");
                 Console.WriteLine("3. 회원 검색");
+                Console.WriteLine("4. 회원 수정");
+                Console.WriteLine("5. 회원 삭제");
+
                 iChoice = int.Parse(Console.ReadLine());
                 switch (iChoice)
                 {
@@ -84,10 +87,47 @@ namespace day4_6 // 회원관리 프로그램
                     case 3:
                         SearchMember();
                         break;
+                    case 4:
+                        ModifyMember();
+                        break;
+                    case 5:
+                        DeleteMember();
+                        break;
                     
                 }
             }
         }
+        private void ModifyMember()
+        {
+            Console.Write("수정할 전화번호: ");
+            string strTelNo = Console.ReadLine();
+
+            Member m = SearchMember(strTelNo);
+            if (m == null)
+            {
+                Console.WriteLine("찾으려는 데이터가 없습니다.");
+            }
+            else
+            {
+                m.InputData();
+            }
+        }
+        private void DeleteMember()
+        {
+            Console.Write("삭제할 전화번호: ");
+            string strTelNo = Console.ReadLine();
+
+            Member m = SearchMember(strTelNo);
+            if (m == null)
+            {
+                Console.WriteLine("삭제하려는 데이터가 없습니다.");
+            }
+            else
+            {
+                MemList.Remove(m);
+            }
+        }
+
         private void InsertMember()
             //                    MemberMgr this
         {
