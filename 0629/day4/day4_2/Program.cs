@@ -8,47 +8,36 @@ namespace day4_2
 {
     class Program
     {
+        delegate void DecoDelegate();
         static void Main(string[] args)
         {
             int[] iArray = new int[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-            DispFunc(iArray);
+            DispFunc(iArray, Header, Footer, Seperator);
+            DispFunc(iArray, Empty, Empty, Empty);
+        }
+        static void Empty() { }
+        static void Header()
+        {
+            Console.WriteLine("==============================================");
+        }
+        static void Footer()
+        {
+            Console.WriteLine("==============================================");
+        }
+        static void Seperator()
+        {
+            Console.WriteLine("----------------------------------------------");
         }
 
-        static void DispFunc(int [] iArray)
+        static void DispFunc(int [] iArray, DecoDelegate HeaderFunc, DecoDelegate FooterFunc, DecoDelegate SepFunc)
         {
-            Console.WriteLine("==============================================");
+            HeaderFunc();
             for (int i = 0; i < iArray.Length; i++)
             {
                 Console.WriteLine("iArray[{0}] = {1}", i, iArray[i]);
-                Console.WriteLine("----------------------------------------------");
+                SepFunc();
             }
-            Console.WriteLine("==============================================");
-        }
-        static void DispFunc2(int[] iArray)
-        {
-            for (int i = 0; i < iArray.Length; i++)
-            {
-                Console.WriteLine("iArray[{0}] = {1}", i, iArray[i]);
-            }
-        }
-        static void DispFunc3(int[] iArray, int iGubun)
-        {
-            if (iGubun == 1)
-            {
-                Console.WriteLine("==============================================");
-            }
-            for (int i = 0; i < iArray.Length; i++)
-            {
-                Console.WriteLine("iArray[{0}] = {1}", i, iArray[i]);
-                if (iGubun==1)
-                {
-                    Console.WriteLine("---------------------------------------------");
-                }
-            }
-            if (iGubun == 1)
-            {
-                Console.WriteLine("==============================================");
-            }
+            FooterFunc();
         }
     }
 }
