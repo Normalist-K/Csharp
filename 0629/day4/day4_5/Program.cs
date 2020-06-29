@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace day4_5
 {
-    class Cat
+    class Cat : IDisposable
     {
         public Cat()
         {
@@ -21,13 +21,18 @@ namespace day4_5
         {
             Console.WriteLine("pulbic Cat()소멸자 호출");
         }
+        // IDisposable 상속하면 반드시 Dispose 함수가 있어야 함
     }
     class Program
     {
         static void Main(string[] args)
         {
-            Cat c = new Cat();
-            c.Dispose();
+            using (Cat c = new Cat())
+            {
+                Console.WriteLine("Hello, World!");
+            }
+            // using을 쓰면 자동으로 Dispose함수 호출, 근데 쓰는 경우는 잘 없음. 
+            // 그냥 c.Dispose(); 주로 사용
         }
     }
 }
