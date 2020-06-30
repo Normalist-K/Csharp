@@ -60,7 +60,7 @@ namespace day4_6
                 new Member("김길동","마산","678-6789",15),
             };
             StreamWriter w = new StreamWriter(@"C:\Users\uvent\source\repos\Normalist-K\hustar2\0630\day4\day4_6\1.txt");
-            w.WriteLine("{0}", MemList.Count);
+            //w.WriteLine("{0}", MemList.Count);
             foreach (Member m in MemList)
             {
                 m.SaveToFile(w);
