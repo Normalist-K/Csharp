@@ -36,13 +36,12 @@ namespace day4_1
                 new Member() { Name = "지길동", Addr = "포항", TelNo = "567-1234" },
                 new Member() { Name = "박길동", Addr = "서울", TelNo = "567-1234" },
             };
-            var v = from item in MemList
-                    where item.CompareAddr("서울")
-                    orderby item.Name ascending
-                    // select item;
-                    // 위에껀 하나의 heap 메모리를 두개가 포인팅, 밑에껀 heap 메모리의 객체정보를 받아서 새로 객체 생성
-                    // 위에꺼로 쓰면 새로운 객체를 생성하는게 아니라서 효율이 나쁘지 않다.
-                    select new Member() { Name = item.Name, Addr = item.Addr, TelNo = item.TelNo };
+            // enumerable <- List가 IOrderedEnumerable Interface 상속받음
+            // 원하는 클래스로 바꿀 수도 있다.
+            List<Member> v = (from item in MemList
+                              where item.CompareAddr("서울")
+                              orderby item.Name ascending
+                              select item).ToList<Member>();
             foreach (var vItem in v)
             {
                 vItem.PrintData();
