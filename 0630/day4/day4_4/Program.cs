@@ -10,29 +10,28 @@ namespace day4_4
     {
         static void Main(string[] args)
         {
-            if (MyFunc1() == false)
+            try
+            {
+                MyFunc1();
+                Console.WriteLine("함수 호출 성공");
+                Console.WriteLine("Main()함수 나머지 계속 실행");
+            }
+            catch (Exception)
             {
                 Console.WriteLine("함수 호출 실패");
                 return;
             }
-            Console.WriteLine("함수 호출 성공");
-            Console.WriteLine("Main()함수 나머지 계속 실행");
         }
-        static bool MyFunc1()
+        static void MyFunc1()
         {
-            if (MyFunc2() == false)
-            {
-                Console.WriteLine("함수 호출 실패");
-                return false;
-            }
+            MyFunc2();
             Console.WriteLine("함수 호출 성공");
             Console.WriteLine("MyFunc1()함수 나머지 계속 실행");
-            return true;
         }
-        static bool MyFunc2()
+        static void MyFunc2()
         {
             Console.WriteLine("static bool MyFunc2()함수 실행");
-            return false;
+            throw new Exception();
         }
     }
 }
