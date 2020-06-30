@@ -8,22 +8,36 @@ namespace day4_1
 {
     class Program
     {
-        class Cat
+        class Member
         {
-            public int AGE
-            { get; set; }
             public void PrintData()
             {
-                Console.WriteLine("AGE: {0}", AGE);
+                Console.WriteLine("이름: {0}", Name);
+                Console.WriteLine("주소: {0}", Addr);
+                Console.WriteLine("전화번호: {0}", TelNo);
             }
+            public bool CompareAddr(string strAddr)
+            {
+                return Addr == strAddr;
+            }
+            public string Name;
+            public string Addr;
+            public string TelNo;
+            // public으로 한 이유는 초기화 쉽게 하기위해서.. 원래는 private!
         }
         static void Main(string[] args)
         {
             // LINQ
-            List<int> iList = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-            var v = from item in iList
-                    where item % 2 == 0
-                    select new Cat() { AGE = item };
+            List<Member> MemList = new List<Member>() { 
+                new Member() { Name = "홍길동", Addr = "서울", TelNo = "123-1234" },
+                new Member() { Name = "김길동", Addr = "대전", TelNo = "234-1234" },
+                new Member() { Name = "이길동", Addr = "대구", TelNo = "345-1234" },
+                new Member() { Name = "박길동", Addr = "서울", TelNo = "456-1234" },
+                new Member() { Name = "지길동", Addr = "포항", TelNo = "567-1234" },
+            };
+            var v = from item in MemList
+                    where item.CompareAddr("서울")
+                    select item;
             foreach (var vItem in v)
             {
                 vItem.PrintData();
