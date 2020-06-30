@@ -20,12 +20,14 @@
             <ColumnDefinition Width="200"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <TextBlock FontFamily="궁서" FontSize="20" HorizontalAlignment="Right" TextWrapping="Wrap" Text="이름: " VerticalAlignment="Center" RenderTransformOrigin="0.209,-0.162"/>
-        <TextBox x:Name="txtName" Grid.Column="1" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="350" KeyDown="txtName_KeyDown"/>
+        <TextBox x:Name="txtName" Grid.Column="1" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="350" KeyDown="txtName_KeyDown" GotFocus="txtName_GotFocus" LostFocus="txtName_LostFocus"/>
         <TextBlock Grid.Row="1" FontFamily="궁서" FontSize="20" HorizontalAlignment="Right" TextWrapping="Wrap" Text="주소: " VerticalAlignment="Center" RenderTransformOrigin="0.209,-0.162"/>
         <TextBox x:Name="txtAddr" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="350"/>
         <TextBlock Grid.Row="2" FontFamily="궁서" FontSize="20" HorizontalAlignment="Right" TextWrapping="Wrap" Text="전화번호: " VerticalAlignment="Center" RenderTransformOrigin="0.209,-0.162"/>
         <TextBox x:Name="txtTelNo" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="350"/>
         <TextBlock Grid.Row="3" FontFamily="궁서" FontSize="20" HorizontalAlignment="Right" TextWrapping="Wrap" Text="나이: " VerticalAlignment="Center" RenderTransformOrigin="0.209,-0.162"/>
         <TextBox x:Name="txtAge" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="350"/>
+        <Button x:Name="btnMemInsert" Content="회원등록" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Center" Click="btnMemInsert_Click"/>
+        <Button x:Name="btnMemSearch" Content="회원검색" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnMemSearch_Click"/>
     </Grid>
 </Window>
