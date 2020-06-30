@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace day4_WpfApp1
+namespace day4_WPF
 {
     /// <summary>
     /// MainWindow.xaml에 대한 상호 작용 논리
@@ -25,9 +25,17 @@ namespace day4_WpfApp1
             InitializeComponent();
         }
 
-        private void btnTest1_Click(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            txtName.Focus();
+        }
 
+        private void txtName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                txtAddr.Focus();
+            }
         }
     }
 }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace day4_WpfApp1.Properties
+namespace day4_WPF.Properties
 {
 
 

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace day4_WpfApp1
+namespace day4_WPF
 {
     /// <summary>
     /// App.xaml에 대한 상호 작용 논리
