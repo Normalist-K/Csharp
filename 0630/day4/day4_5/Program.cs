@@ -15,24 +15,19 @@ namespace day4_5
             string s2 = "김길동";
             string s3 = "박길동";
 
+            StreamWriter w = new StreamWriter(@"C:\Users\uvent\source\repos\Normalist-K\hustar2\0630\day4\day4_5\1.txt");
+            w.WriteLine(s1);
+            w.WriteLine(s2);
+            w.WriteLine(s3);
 
-            FileStream f = new FileStream("C://Users//uvent//source//repos//Normalist-K//hustar2//0630//day4//day4_5//1.txt", FileMode.Create);
-            //FileStream f = new FileStream(@"C:\Users\uvent\source\repos\Normalist-K\hustar2\0630", FileMode.Create);
-            // 역슬래쉬 쓰는 두가지 방법
+            w.Close();
+            w.Dispose();
 
-            // string을 파일로 저장할 때 byte 배열로 인코딩해야 함
-            byte[] data = Encoding.Default.GetBytes(s1);
-            f.Write(data, 0, data.Length);
-            
-            data = Encoding.Default.GetBytes(s2);
-            f.Write(data, 0, data.Length);
-            
-            data = Encoding.Default.GetBytes(s3);
-            f.Write(data, 0, data.Length);
-
-
-            f.Close();
-            f.Dispose();
+            StreamReader r = new StreamReader(@"C:\Users\uvent\source\repos\Normalist-K\hustar2\0630\day4\day4_5\1.txt");
+            while (r.EndOfStream == false)
+            {
+                Console.WriteLine(r.ReadLine());
+            }
         }
     }
 }
