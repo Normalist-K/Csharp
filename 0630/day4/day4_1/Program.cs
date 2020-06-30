@@ -32,12 +32,17 @@ namespace day4_1
                 new Member() { Name = "홍길동", Addr = "서울", TelNo = "123-1234" },
                 new Member() { Name = "김길동", Addr = "대전", TelNo = "234-1234" },
                 new Member() { Name = "이길동", Addr = "대구", TelNo = "345-1234" },
-                new Member() { Name = "박길동", Addr = "서울", TelNo = "456-1234" },
+                new Member() { Name = "기길동", Addr = "서울", TelNo = "456-1234" },
                 new Member() { Name = "지길동", Addr = "포항", TelNo = "567-1234" },
+                new Member() { Name = "박길동", Addr = "서울", TelNo = "567-1234" },
             };
             var v = from item in MemList
                     where item.CompareAddr("서울")
-                    select item;
+                    orderby item.Name ascending
+                    // select item;
+                    // 위에껀 하나의 heap 메모리를 두개가 포인팅, 밑에껀 heap 메모리의 객체정보를 받아서 새로 객체 생성
+                    // 위에꺼로 쓰면 새로운 객체를 생성하는게 아니라서 효율이 나쁘지 않다.
+                    select new Member() { Name = item.Name, Addr = item.Addr, TelNo = item.TelNo };
             foreach (var vItem in v)
             {
                 vItem.PrintData();
