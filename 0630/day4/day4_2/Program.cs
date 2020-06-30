@@ -47,6 +47,23 @@ namespace day4_2
         {
             m_iCurrent = 0;
         }
+
+        public IEnumerable Next()
+        {
+            int iStart = 0;
+            while (true)
+	        {
+                Console.WriteLine("public IEnumerable Next() iStart : {0}", iStart);
+                if (iStart == m_size)
+	            {
+                    yield break;
+                    // yield break하면 완전히 종료
+	            }
+                yield return m_data[iStart];
+                // yield return하면 일단 여기서 실행이 멈춤. 각 return 값이 foreach 구문으로 넘어가서 실행되고 다시 돌아옴.
+                ++iStart;
+	        }
+        }
     }
     class Program
     {
@@ -57,14 +74,10 @@ namespace day4_2
             {
                 iArray[i] = i;
             }
-            for (int i = 0; i < iArray.SIZE; i++)
-            {
-                Console.WriteLine("iArray[{0}] = {1}", i, iArray[i]);
-            }
-            foreach (int i in iArray)
-            {
+            foreach (int i in iArray.Next())
+	        {
                 Console.WriteLine("iArrya = {0}", iArray[i]);
-            }
+	        }
         }
     }
 }
