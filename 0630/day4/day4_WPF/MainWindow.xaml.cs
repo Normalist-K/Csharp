@@ -38,15 +38,58 @@ namespace day4_WPF
                 txtAddr.Focus();
             }
         }
-
         private void txtName_GotFocus(object sender, RoutedEventArgs e)
         {
             txtName.Background = Brushes.Yellow;
         }
-
         private void txtName_LostFocus(object sender, RoutedEventArgs e)
         {
             txtName.Background = Brushes.White;
+        }
+        private void txtAddr_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                txtTelNo.Focus();
+            }
+        }
+        private void txtAddr_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtAddr.Background = Brushes.Yellow;
+        }
+        private void txtAddr_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtAddr.Background = Brushes.White;
+        }
+        private void txtTelNo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                txtAge.Focus();
+            }
+        }
+        private void txtTelNo_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtTelNo.Background = Brushes.Yellow;
+        }
+        private void txtTelNo_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtTelNo.Background = Brushes.White;
+        }
+        private void txtAge_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                btnMemInsert_Click(sender, e);
+            }
+        }
+        private void txtAge_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtAge.Background = Brushes.Yellow;
+        }
+        private void txtAge_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtAge.Background = Brushes.White;
         }
 
         private void btnMemInsert_Click(object sender, RoutedEventArgs e)
@@ -54,10 +97,7 @@ namespace day4_WPF
             Member mSearch = MemMgr.SearchMember(txtName.Text);
             if (mSearch != null)
             {
-                txtName.Text = mSearch.Name;
-                txtAddr.Text = mSearch.Addr;
-                txtTelNo.Text = mSearch.TelNo;
-                txtAge.Text = mSearch.Age.ToString();
+                DisplayMember(mSearch.Name, mSearch.Addr, mSearch.TelNo, mSearch.Age.ToString());
                 MessageBox.Show("이미 등록된 회원입니다.");
                 return;
             }
@@ -70,21 +110,52 @@ namespace day4_WPF
                 Age = int.Parse(txtAge.Text) 
             };
             MemMgr.InsertMember(m);
-            MessageBox.Show("회원 등록 성공");
-            txtName.Text = "";
-            txtAddr.Text = "";
-            txtTelNo.Text = "";
-            txtAge.Text = "";
+            //MessageBox.Show("회원 등록 성공");
+            DisplayMember("", "", "", "");
+        }
+        private void DisplayMember(string strName, string strAddr, string strTelNo, string strAge)
+        {
+            txtName.Text = strName;
+            txtAddr.Text = strAddr;
+            txtTelNo.Text = strTelNo;
+            txtAge.Text = strAge;
         }
         private MemberMgr MemMgr = new MemberMgr();
 
         private void btnMemSearch_Click(object sender, RoutedEventArgs e)
         {
+            Member mSearch = MemMgr.SearchMember(txtName.Text);
+            if (mSearch != null)
+            {
+                DisplayMember(mSearch.Name, mSearch.Addr, mSearch.TelNo, mSearch.Age.ToString());
+            }
+            else
+            {
+                MessageBox.Show("존재하지 않는 회원입니다.");
+            }
+        }
 
+        private void btnPrintAllMember_Click(object sender, RoutedEventArgs e)
+        {
+            listSearchResult.Items.Clear();
+            MemMgr.PrintAllMember(listSearchResult);
+        }
+
+        private void listSearchResult_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left && listSearchResult.SelectedItem != null)
+            {
+                Member m = (Member)listSearchResult.SelectedItem;
+                DisplayMember(m.Name, m.Addr, m.TelNo, m.Age.ToString());
+            }
         }
     }
     class MemberMgr
     {
+        public void PrintAllMember(ListBox listSearchResult)
+        {
+            m_MemList.ForEach(m => listSearchResult.Items.Add(m));
+        }
         public Member SearchMember(string txtName)
         {
             return m_MemList.Find(m => m.ComparedName(txtName));
@@ -110,6 +181,10 @@ namespace day4_WPF
     }
     class Member
     {
+        public override string ToString()
+        {
+            return string.Format("이름: {0}\t주소: {1}\t전화번호: {2}\t나이: {3}", Name, Addr, TelNo, Age);
+        }
         public bool ComparedName(string strName)
         {
             return Name == strName;
