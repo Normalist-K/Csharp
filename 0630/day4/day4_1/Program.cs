@@ -61,7 +61,7 @@ namespace day4_1
                 new Video() { VideoNo = "6", Title = "어벤져스" },
             };
             List<Rent> RentList = new List<Rent>() {
-                new Rent() { VideoNo = "1", Name = "홍길동" },
+                new Rent() { VideoNo = "7", Name = "홍길동" },
                 new Rent() { VideoNo = "2", Name = "홍길동" },
                 new Rent() { VideoNo = "3", Name = "김길동" },
                 new Rent() { VideoNo = "4", Name = "박길동" },
@@ -70,15 +70,18 @@ namespace day4_1
                 new Rent() { VideoNo = "3", Name = "지길동" },
                 new Rent() { VideoNo = "2", Name = "기길동" },
                 new Rent() { VideoNo = "1", Name = "이길동" },
-                new Rent() { VideoNo = "4", Name = "지길동" },
+                new Rent() { VideoNo = "8", Name = "지길동" },
             };
 
+            //outer join : 데이터가 없으면 blank로 나오게 하는 기능
             var v = from item in RentList
-                    join video in VideoList on item.VideoNo equals video.VideoNo
+                    join video in VideoList on item.VideoNo equals video.VideoNo into oVideo
+                    //from o in oVideo.DefaultIfEmpty(new Video())
+                    from o in oVideo.DefaultIfEmpty(new Video() { Title = "삭제된 비디오 데이터입니다."})
                     join mem in MemList on item.Name equals mem.Name
                     select new { 
                         VideoNo = item.VideoNo, 
-                        Title = video.Title, 
+                        Title = o.Title, 
                         Name = item.Name, 
                         Addr = mem.Addr, 
                         TelNo = mem.TelNo, 
@@ -91,7 +94,6 @@ namespace day4_1
                 Console.WriteLine("회원 이름: {0}", i.Name);
                 Console.WriteLine("회원 주소: {0}", i.Addr);
                 Console.WriteLine("회원 전화번호: {0}", i.TelNo);
-
             }
         }
     }
