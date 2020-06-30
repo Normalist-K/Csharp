@@ -53,7 +53,7 @@ namespace day4_6 // 회원관리 프로그램
             return TelNo == tel;
         }
 
-        private string TelNo;
+        private string TelNo; // key값으로 활용
         private string Name;
         private string Addr;
     }
@@ -168,7 +168,7 @@ namespace day4_6 // 회원관리 프로그램
             Console.Write("찾을 전화번호: ");
             string strTelNo = Console.ReadLine();
 
-            Member m = SearchMember(strTelNo);
+            Member m = SearchMember(strTelNo);  
             if (m==null)
             {
                 Console.WriteLine("찾으려는 데이터가 없습니다.");
@@ -180,10 +180,55 @@ namespace day4_6 // 회원관리 프로그램
         }
         private List<Member> MemList = new List<Member>();
     }
+    // 대여 관리
+    // =====================================================================
+    // 1. 대여등록
+    //   1) 회원번호 입력
+    //     1-1) 등록된 회원인지 검색. 등록되어 있지 않으면 실패
+    //     1-2) 등록된 회원이면 회원 정보 출력
+    //     1-3) 미 반납 비디오 출력
+    //   2) 비디오번호 등록
+    //     2-1) 등록된 비디오인지 검색. 등록되어 있지 않으면 실패
+    //     2-2) 등록된 비디오이면 비디오 정보 출력
+    // 2. 대여출력
+    //   1) 비디오 정보, 회원 정보, 대여일, 반납일 출력
+    // 3. 반납
+    //   1) 대여 리스트에서 검색
+    //     1-1) 대여된 비디오이면 대여 클래스의 ReturnDate에 현재 일시 등록
+    // 4. 대여삭제
+    //   1) 비디오 번호, 회원 번호 입력 후 검색하여 대여리스트에서 삭제
+    // =====================================================================
+    // =====================================================================
+    // 비디오 관리
+    // =====================================================================
+    // 1. 비디오 번호, 영화 제목, 주연배우, 대여료
+    // =====================================================================
+    class Rent
+    {
+        public void PrintData()
+        {
+            Console.WriteLine("RentDate: {0}", RentDate);
+            Console.WriteLine("ReturnDate: {0}", ReturnDate);
+
+        }
+        private string TelNo;
+        private string VideoNo;
+        private DateTime RentDate;
+        private DateTime ReturnDate;
+    }
     class Program
     {
         static void Main(string[] args)
         {
+            Rent r1 = null;
+            Rent r2 = new Rent();
+            r2.PrintData();
+
+            //int i;
+            //Console.WriteLine("{0}", i);
+            // error!! 
+            int? i = null;
+
             MemberMgr m = new MemberMgr();
             m.Menu();
         }
