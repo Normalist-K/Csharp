@@ -34,17 +34,22 @@ namespace day4_1
                 new Member() { Name = "이길동", Addr = "대구", TelNo = "345-1234" },
                 new Member() { Name = "기길동", Addr = "서울", TelNo = "456-1234" },
                 new Member() { Name = "지길동", Addr = "포항", TelNo = "567-1234" },
-                new Member() { Name = "박길동", Addr = "서울", TelNo = "567-1234" },
+                new Member() { Name = "박길동", Addr = "대구", TelNo = "567-1234" },
             };
-            // enumerable <- List가 IOrderedEnumerable Interface 상속받음
-            // 원하는 클래스로 바꿀 수도 있다.
-            List<Member> v = (from item in MemList
-                              where item.CompareAddr("서울")
-                              orderby item.Name ascending
-                              select item).ToList<Member>();
+            var v = from item in MemList
+                    orderby item.Name
+                    group item by item.Addr;
+            // vItem 자체가 linked list가 됨
             foreach (var vItem in v)
             {
-                vItem.PrintData();
+                Console.WriteLine("-----------------------------------------");
+                Console.WriteLine("지역 : {0}, 회원수: {1}", vItem.Key, vItem.Count());
+                Console.WriteLine("-----------------------------------------");
+                foreach (var item in vItem)
+                {
+                    item.PrintData();
+                }
+                Console.WriteLine("-----------------------------------------");
             }
         }
     }
