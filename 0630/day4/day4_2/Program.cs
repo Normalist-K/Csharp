@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace day4_2
 {
-    class IntArray : IEnumerable<int>, IEnumerator<int>
+    class IntArray : IEnumerable, IEnumerator
     {
         public IntArray(int size)
         {
@@ -20,9 +20,9 @@ namespace day4_2
             get { return m_size; }
         }
 
-        public int Current => throw new NotImplementedException();
+        public int Current => m_data[m_iCurrent];
 
-        object IEnumerator.Current => throw new NotImplementedException();
+        object IEnumerator.Current => m_data[m_iCurrent];
 
         public int this[int idx]
         {
@@ -33,29 +33,29 @@ namespace day4_2
         private int m_size;
         private int m_iCurrent;
 
-        public IEnumerator<int> GetEnumerator()
+        public IEnumerator GetEnumerator()
         {
-            throw new NotImplementedException();
+            return m_data.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return m_data.GetEnumerator();
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
         }
 
         public bool MoveNext()
         {
-            throw new NotImplementedException();
+            m_iCurrent++;
+            return m_iCurrent < m_size;
         }
 
         public void Reset()
         {
-            throw new NotImplementedException();
+            m_iCurrent = 0;
         }
     }
     class Program
