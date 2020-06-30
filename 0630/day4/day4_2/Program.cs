@@ -2,12 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace day4_2
 {
-    class IntArray : IEnumerable, IEnumerator
+    class IntArray : IEnumerator, IEnumerable
     {
         public IntArray(int size)
         {
@@ -20,9 +21,7 @@ namespace day4_2
             get { return m_size; }
         }
 
-        public int Current => m_data[m_iCurrent];
-
-        object IEnumerator.Current => m_data[m_iCurrent];
+        public object Current => m_data[m_iCurrent];
 
         public int this[int idx]
         {
@@ -38,18 +37,9 @@ namespace day4_2
             return m_data.GetEnumerator();
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return m_data.GetEnumerator();
-        }
-
-        public void Dispose()
-        {
-        }
-
         public bool MoveNext()
         {
-            m_iCurrent++;
+            ++m_iCurrent;
             return m_iCurrent < m_size;
         }
 
