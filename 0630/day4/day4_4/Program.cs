@@ -16,9 +16,9 @@ namespace day4_4
                 Console.WriteLine("함수 호출 성공");
                 Console.WriteLine("Main()함수 나머지 계속 실행");
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Console.WriteLine("함수 호출 실패");
+                Console.WriteLine("함수 호출 실패 ErrMsg : {0}", e.Message);
                 return;
             }
         }
@@ -31,7 +31,7 @@ namespace day4_4
         static void MyFunc2()
         {
             Console.WriteLine("static bool MyFunc2()함수 실행");
-            throw new Exception();
+            throw new Exception("MyFunc2 Error");
         }
     }
 }
