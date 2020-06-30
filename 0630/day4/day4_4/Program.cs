@@ -13,17 +13,17 @@ namespace day4_4
             if (MyFunc1() == false)
             {
                 Console.WriteLine("함수 호출 실패");
+                return;
             }
-            else
-            {
-                Console.WriteLine("함수 호출 성공");
-            }
+            Console.WriteLine("함수 호출 성공");
+            Console.WriteLine("Main()함수 나머지 계속 실행");
         }
         static bool MyFunc1()
         {
             if (MyFunc2() == false)
             {
                 Console.WriteLine("함수 호출 실패");
+                return false;
             }
             Console.WriteLine("함수 호출 성공");
             Console.WriteLine("MyFunc1()함수 나머지 계속 실행");
@@ -31,7 +31,8 @@ namespace day4_4
         }
         static bool MyFunc2()
         {
-            return true;
+            Console.WriteLine("static bool MyFunc2()함수 실행");
+            return false;
         }
     }
 }
