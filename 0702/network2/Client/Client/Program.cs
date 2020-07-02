@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +12,23 @@ namespace Client
     {
         static void Main(string[] args)
         {
+            Socket RemoteSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            IPEndPoint ip = new IPEndPoint(IPAddress.Parse("192.168.0.12"), 50000);
+            RemoteSocket.Connect(ip);
+            byte[] recvData = new byte[4096];
+            while (true)
+            {
+                string strMsg = Console.ReadLine();
+                byte[] sendData = Encoding.Default.GetBytes(strMsg);
+                RemoteSocket.Send(sendData);
+
+                int iRecvLen = RemoteSocket.Receive(recvData);
+                strMsg = Encoding.Default.GetString(recvData, 0, iRecvLen);
+                Console.WriteLine(strMsg);
+            }
+
+            RemoteSocket.Close();
+            RemoteSocket.Dispose();
         }
     }
 }
