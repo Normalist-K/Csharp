@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -33,6 +34,25 @@ namespace Client
             IPEndPoint ip = new IPEndPoint(IPAddress.Parse("192.168.0.12"), 50000);
             IPEndPoint ip2 = new IPEndPoint(IPAddress.Parse("192.168.0.44"), 50000);
             m_RemoteSocket.Connect(ip2);
+
+            Thread RecvThread = new Thread(delegate ()
+            {
+                byte[] data = new byte[4096];
+                while (true)
+                {
+                    try
+                    {
+                        int iRecvLen = m_RemoteSocket.Receive(data);
+                        string strMsg = Encoding.Default.GetString(data, 0, iRecvLen);
+                        Dispatcher.Invoke(() => listRecv.Items.Add(strMsg));
+                    }
+                    catch (Exception)
+                    {
+
+                        return;
+                    }
+                }
+            });
         }
 
         private void textSend_KeyDown(object sender, KeyEventArgs e)
