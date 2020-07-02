@@ -36,16 +36,24 @@ namespace Server
 
             Thread AcceptThread = new Thread(delegate ()
             {
-                while (true)
+                try
                 {
-                    Socket ClientSocket = m_ServerSocket.Accept();
-                    Client NewClient = new Client(ClientSocket);
-                    NewClient.ClientRecvEvent += NewClient_ClientRecvEvent;
-                    NewClient.ClientDisConnEvent += NewClient_ClientDisConnEvent;
-                    Dispatcher.Invoke(() => listConnUser.Items.Add(NewClient.ClientInfo));
-                    NewClient.Recv();
-                }
+                    while (true)
+                    {
+                        Socket ClientSocket = m_ServerSocket.Accept();
+                        Client NewClient = new Client(ClientSocket);
+                        NewClient.ClientRecvEvent += NewClient_ClientRecvEvent;
+                        NewClient.ClientDisConnEvent += NewClient_ClientDisConnEvent;
+                        Dispatcher.Invoke(() => listConnUser.Items.Add(NewClient.ClientInfo));
+                        NewClient.Recv();
 
+                        m_ClientMgr.InsertClient(NewClient);
+                    }
+                }
+                catch (Exception)
+                {
+                    return;
+                }
             });
             AcceptThread.Start();
         }
@@ -65,10 +73,18 @@ namespace Server
             {
                 int iIndex = listRecvMsg.Items.Add(strMsg);
                 listRecvMsg.ScrollIntoView(listRecvMsg.Items[iIndex]);
+                m_ClientMgr.SendToAll(strMsg);
             });
         }
-
+        ClientMgr m_ClientMgr = new ClientMgr();
         Socket m_ServerSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            m_ServerSocket.Close();
+            m_ServerSocket.Dispose();
+            m_ClientMgr.RemoveAllClient();
+        }
     }
     class Client
     {
@@ -131,6 +147,22 @@ namespace Server
     }
     class ClientMgr
     {
+        public void InsertClient(Client NewClient)
+        {
+            m_ClientList.Add(NewClient);
+        }
+        public void DeleteClient(Client DelClient)
+        {
+            m_ClientList.Remove(DelClient);
+        }
+        public void RemoveAllClient()
+        {
+            m_ClientList.ForEach(c => c.Dispose());
+        }
+        public void SendToAll(string strMsg)
+        {
+            m_ClientList.ForEach(c => c.Send(strMsg));
+        }
         List<Client> m_ClientList = new List<Client>();
     }
 }

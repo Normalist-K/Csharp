@@ -31,7 +31,8 @@ namespace Client
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             IPEndPoint ip = new IPEndPoint(IPAddress.Parse("192.168.0.12"), 50000);
-            m_RemoteSocket.Connect(ip);
+            IPEndPoint ip2 = new IPEndPoint(IPAddress.Parse("192.168.0.44"), 50000);
+            m_RemoteSocket.Connect(ip2);
         }
 
         private void textSend_KeyDown(object sender, KeyEventArgs e)
