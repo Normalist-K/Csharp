@@ -18,7 +18,19 @@ namespace Server
             ServerSocket.Listen(5);
 
             Socket ClientSocket = ServerSocket.Accept(); // client 접속할 때까지 멈춰있음
-            Console.WriteLine("클라이언트 접속 성공");
+            Console.WriteLine("클라이언트 접속 성공 {0}", ClientSocket.RemoteEndPoint);
+
+            byte[] recvBuffer = new byte[4096];
+            while (true)
+            {
+                int iRecvLen = ClientSocket.Receive(recvBuffer);
+                string strMsg = Encoding.Default.GetString(recvBuffer, 0, iRecvLen);
+                Console.WriteLine(strMsg);
+
+                strMsg = Console.ReadLine();
+                byte [] sendData = Encoding.Default.GetBytes(strMsg);
+                ClientSocket.Send(sendData);
+            }
 
             ServerSocket.Close();
             ServerSocket.Dispose();
