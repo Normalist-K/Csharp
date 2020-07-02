@@ -41,6 +41,18 @@ namespace Server
                     Socket ClientSocekt = m_ServerSocket.Accept();
                     Dispatcher.Invoke(() => listConnUser.Items.Add(ClientSocekt.RemoteEndPoint));
                     // Dispatcher: 메시지큐에 action 함수를 넣어줌 -> 메인쓰레드에서 처리할 수 있도록
+                    Thread RecvTread = new Thread(delegate (object objSocket)
+                    {
+                        Socket NewClientSocket = (Socket)objSocket;
+                        byte[] data = new byte[4096];
+                        while (true)
+                        {
+                            int iRecvLen = NewClientSocket.Receive(data);
+                            string strMsg = Encoding.Default.GetString(data, 0, iRecvLen);
+                            Dispatcher.Invoke(() => listRecvMsg.Items.Add(strMsg));
+                        }
+                    });
+                    RecvTread.Start(ClientSocekt);
                 }
 
             });
