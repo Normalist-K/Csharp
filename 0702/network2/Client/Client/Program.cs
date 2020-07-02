@@ -22,9 +22,9 @@ namespace Client
                 byte[] sendData = Encoding.Default.GetBytes(strMsg);
                 RemoteSocket.Send(sendData);
 
-                int iRecvLen = RemoteSocket.Receive(recvData);
-                strMsg = Encoding.Default.GetString(recvData, 0, iRecvLen);
-                Console.WriteLine(strMsg);
+                //int iRecvLen = RemoteSocket.Receive(recvData);
+                //strMsg = Encoding.Default.GetString(recvData, 0, iRecvLen);
+                //Console.WriteLine(strMsg);
             }
 
             RemoteSocket.Close();
