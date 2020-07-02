@@ -27,11 +27,11 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition Width="200"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <TextBlock FontFamily="궁서" FontSize="20" HorizontalAlignment="Right" TextWrapping="Wrap" Text="이름: " VerticalAlignment="Center" RenderTransformOrigin="0.209,-0.162"/>
+                        <TextBlock FontFamily="고딕" FontSize="20" HorizontalAlignment="Right" TextWrapping="Wrap" Text="이름: " VerticalAlignment="Center" RenderTransformOrigin="0.209,-0.162"/>
                         <Button x:Name="btnMemSearch" Content="회원검색" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnMemSearch_Click"/>
-                        <TextBlock Grid.Row="1" FontFamily="궁서" FontSize="20" HorizontalAlignment="Right" TextWrapping="Wrap" Text="주소: " VerticalAlignment="Center" RenderTransformOrigin="0.209,-0.162"/>
-                        <TextBlock Grid.Row="2" FontFamily="궁서" FontSize="20" HorizontalAlignment="Right" TextWrapping="Wrap" Text="전화번호: " VerticalAlignment="Center" RenderTransformOrigin="0.209,-0.162"/>
-                        <TextBlock Grid.Row="3" FontFamily="궁서" FontSize="20" HorizontalAlignment="Right" TextWrapping="Wrap" Text="나이: " VerticalAlignment="Center" RenderTransformOrigin="0.209,-0.162"/>
+                        <TextBlock Grid.Row="1" FontFamily="고딕" FontSize="20" HorizontalAlignment="Right" TextWrapping="Wrap" Text="주소: " VerticalAlignment="Center" RenderTransformOrigin="0.209,-0.162"/>
+                        <TextBlock Grid.Row="2" FontFamily="고딕" FontSize="20" HorizontalAlignment="Right" TextWrapping="Wrap" Text="전화번호: " VerticalAlignment="Center" RenderTransformOrigin="0.209,-0.162"/>
+                        <TextBlock Grid.Row="3" FontFamily="고딕" FontSize="20" HorizontalAlignment="Right" TextWrapping="Wrap" Text="나이: " VerticalAlignment="Center" RenderTransformOrigin="0.209,-0.162"/>
                         <TextBox x:Name="txtName" Grid.Column="1" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="350" KeyDown="txtName_KeyDown" GotFocus="txtName_GotFocus" LostFocus="txtName_LostFocus"/>
                         <TextBox x:Name="txtAddr" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="350" GotFocus="txtAddr_GotFocus" KeyDown="txtAddr_KeyDown" LostFocus="txtAddr_LostFocus"/>
                         <TextBox x:Name="txtTelNo" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="350" GotFocus="txtTelNo_GotFocus" KeyDown="txtTelNo_KeyDown" LostFocus="txtTelNo_LostFocus"/>
@@ -46,6 +46,8 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="btnMemInsert" Content="회원등록" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnMemInsert_Click"/>
                         <Button x:Name="btnPrintAllMember" Content="회원출력" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnPrintAllMember_Click" Grid.Column="1"/>
+                        <Button x:Name="btnModifyMember" Content="회원수정" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnModifyMember_Click" Grid.Column="2"/>
+                        <Button x:Name="btnDeleteMember" Content="회원삭제" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnDeleteMember_Click" Grid.Column="3"/>
                     </Grid>
                     <Grid Grid.Row="2">
                         <ListBox x:Name="listSearchResult" Grid.RowSpan="5" MouseDoubleClick="listSearchResult_MouseDoubleClick"/>
@@ -53,7 +55,50 @@
                 </Grid>
             </TabItem>
             <TabItem Header="비디오 관리">
-                
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="200"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock FontFamily="고딕" FontSize="20" HorizontalAlignment="Right" TextWrapping="Wrap" Text="비디오 번호: " VerticalAlignment="Center" RenderTransformOrigin="0.209,-0.162"/>
+                        <Button x:Name="btnVideoSearch" Content="비디오검색" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnVideoSearch_Click"/>
+                        <TextBlock Grid.Row="1" FontFamily="고딕" FontSize="20" HorizontalAlignment="Right" TextWrapping="Wrap" Text="제목: " VerticalAlignment="Center" RenderTransformOrigin="0.209,-0.162"/>
+                        <TextBlock Grid.Row="2" FontFamily="고딕" FontSize="20" HorizontalAlignment="Right" TextWrapping="Wrap" Text="배우: " VerticalAlignment="Center" RenderTransformOrigin="0.209,-0.162"/>
+                        <TextBlock Grid.Row="3" FontFamily="고딕" FontSize="20" HorizontalAlignment="Right" TextWrapping="Wrap" Text="가격: " VerticalAlignment="Center" RenderTransformOrigin="0.209,-0.162"/>
+                        <TextBox x:Name="txtVideoNo" Grid.Column="1" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="350" KeyDown="txtVideoNo_KeyDown" GotFocus="txtVideoNo_GotFocus" LostFocus="txtVideoNo_LostFocus"/>
+                        <TextBox x:Name="txtTitle" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="350" GotFocus="txtTitle_GotFocus" KeyDown="txtTitle_KeyDown" LostFocus="txtTitle_LostFocus"/>
+                        <TextBox x:Name="txtActor" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="350" GotFocus="txtActor_GotFocus" KeyDown="txtActor_KeyDown" LostFocus="txtActor_LostFocus"/>
+                        <TextBox x:Name="txtPrice" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="350" GotFocus="txtPrice_GotFocus" KeyDown="txtPrice_KeyDown" LostFocus="txtPrice_LostFocus"/>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="btnVideoInsert" Content="비디오등록" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnVideoInsert_Click"/>
+                        <Button x:Name="btnPrintAllVideo" Content="비디오출력" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnPrintAllVideo_Click" Grid.Column="1"/>
+                        <Button x:Name="btnModifyVideo" Content="비디오수정" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnModifyVideo_Click" Grid.Column="2"/>
+                        <Button x:Name="btnDeleteVideo" Content="비디오삭제" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnDeleteVideo_Click" Grid.Column="3"/>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <ListBox x:Name="VideolistSearchResult" Grid.RowSpan="5" MouseDoubleClick="VideolistSearchResult_MouseDoubleClick"/>
+                    </Grid>
+                </Grid>
             </TabItem>
             <TabItem Header="대여 관리">
                 
