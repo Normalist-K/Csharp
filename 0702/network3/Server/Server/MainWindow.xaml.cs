@@ -38,30 +38,99 @@ namespace Server
             {
                 while (true)
                 {
-                    Socket ClientSocekt = m_ServerSocket.Accept();
-                    Dispatcher.Invoke(() => listConnUser.Items.Add(ClientSocekt.RemoteEndPoint));
-                    // Dispatcher: 메시지큐에 action 함수를 넣어줌 -> 메인쓰레드에서 처리할 수 있도록
-                    Thread RecvTread = new Thread(delegate (object objSocket)
-                    {
-                        Socket NewClientSocket = (Socket)objSocket;
-                        byte[] data = new byte[4096];
-                        while (true)
-                        {
-                            int iRecvLen = NewClientSocket.Receive(data);
-                            string strMsg = Encoding.Default.GetString(data, 0, iRecvLen);
-                            Dispatcher.Invoke(delegate ()
-                            {
-                                int iIndex = listRecvMsg.Items.Add(strMsg);
-                                listRecvMsg.ScrollIntoView(listRecvMsg.Items[iIndex]);
-                            });
-                        }
-                    });
-                    RecvTread.Start(ClientSocekt);
+                    Socket ClientSocket = m_ServerSocket.Accept();
+                    Client NewClient = new Client(ClientSocket);
+                    NewClient.ClientRecvEvent += NewClient_ClientRecvEvent;
+                    NewClient.ClientDisConnEvent += NewClient_ClientDisConnEvent;
+                    Dispatcher.Invoke(() => listConnUser.Items.Add(NewClient.ClientInfo));
+                    NewClient.Recv();
                 }
 
             });
             AcceptThread.Start();
         }
+
+        private void NewClient_ClientDisConnEvent(Client delClient)
+        {
+            Dispatcher.Invoke(delegate()
+            {
+                int iIndex = listConnUser.Items.IndexOf(delClient.ClientInfo);
+                listConnUser.Items.RemoveAt(iIndex);
+            });
+        }
+
+        private void NewClient_ClientRecvEvent(string strMsg)
+        {
+            Dispatcher.Invoke(delegate ()
+            {
+                int iIndex = listRecvMsg.Items.Add(strMsg);
+                listRecvMsg.ScrollIntoView(listRecvMsg.Items[iIndex]);
+            });
+        }
+
         Socket m_ServerSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+    }
+    class Client
+    {
+        public Client(Socket ClientSocket)
+        {
+            m_ClientSocket = ClientSocket;
+            m_strClientInfo = m_ClientSocket.RemoteEndPoint.ToString();
+        }
+        public string ClientInfo
+        {
+            get
+            {
+                return m_strClientInfo;
+            }
+        }
+        public void Recv()
+        {
+            Thread RecvTread = new Thread(delegate ()
+            {
+                byte[] data = new byte[4096];
+                while (true)
+                {
+                    try
+                    {
+                        int iRecvLen = m_ClientSocket.Receive(data);
+                        string strMsg = Encoding.Default.GetString(data, 0, iRecvLen);
+                        ClientRecvEvent(strMsg);
+                    }
+                    catch (Exception)
+                    {
+                        ClientDisConnEvent(this);
+                        return;
+                    }
+                }
+            });
+            RecvTread.Start();
+        }
+        public void Send(string strSend)
+        {
+            try
+            {
+                byte[] data = Encoding.Default.GetBytes(strSend);
+                m_ClientSocket.Send(data);
+            }
+            catch (Exception)
+            {
+                ClientDisConnEvent(this);
+                return;
+            }
+        }
+        public void Dispose()
+        {
+            m_ClientSocket.Close();
+            m_ClientSocket.Dispose();
+        }
+        private string m_strClientInfo;
+        private Socket m_ClientSocket;
+        public event Action<string> ClientRecvEvent;
+        public event Action<Client> ClientDisConnEvent;
+    }
+    class ClientMgr
+    {
+        List<Client> m_ClientList = new List<Client>();
     }
 }
