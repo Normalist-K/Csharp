@@ -15,7 +15,7 @@ namespace Client
             Socket RemoteSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint ip = new IPEndPoint(IPAddress.Parse("192.168.0.12"), 50000); // 내 서버 IP
             IPEndPoint ip2 = new IPEndPoint(IPAddress.Parse("192.168.0.44"), 50000); // 강사님 서버 IP
-            RemoteSocket.Connect(ip);
+            RemoteSocket.Connect(ip2);
 
             byte[] recvData = new byte[4096];
             while (true)
@@ -25,9 +25,9 @@ namespace Client
                 RemoteSocket.Send(sendData);
 
 
-                int iRecvLen = RemoteSocket.Receive(recvData);
-                strMsg = Encoding.Default.GetString(recvData, 0, iRecvLen);
-                Console.WriteLine(strMsg);
+                //int iRecvLen = RemoteSocket.Receive(recvData);
+                //strMsg = Encoding.Default.GetString(recvData, 0, iRecvLen);
+                //Console.WriteLine(strMsg);
             }
 
             RemoteSocket.Close();
