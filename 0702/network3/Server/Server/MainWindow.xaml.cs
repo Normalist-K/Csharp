@@ -49,7 +49,11 @@ namespace Server
                         {
                             int iRecvLen = NewClientSocket.Receive(data);
                             string strMsg = Encoding.Default.GetString(data, 0, iRecvLen);
-                            Dispatcher.Invoke(() => listRecvMsg.Items.Add(strMsg));
+                            Dispatcher.Invoke(delegate ()
+                            {
+                                int iIndex = listRecvMsg.Items.Add(strMsg);
+                                listRecvMsg.ScrollIntoView(listRecvMsg.Items[iIndex]);
+                            });
                         }
                     });
                     RecvTread.Start(ClientSocekt);
@@ -57,7 +61,6 @@ namespace Server
 
             });
             AcceptThread.Start();
-
         }
         Socket m_ServerSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
     }
