@@ -48,11 +48,11 @@ namespace Client
                     }
                     catch (Exception)
                     {
-
                         return;
                     }
                 }
             });
+            RecvThread.Start();
         }
 
         private void textSend_KeyDown(object sender, KeyEventArgs e)
