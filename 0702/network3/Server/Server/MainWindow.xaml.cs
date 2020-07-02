@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,5 +27,26 @@ namespace Server
         {
             InitializeComponent();
         }
+
+        private void btnStartServer_Click(object sender, RoutedEventArgs e)
+        {
+            IPEndPoint ip = new IPEndPoint(IPAddress.Any, 50000);
+            m_ServerSocket.Bind(ip);
+            m_ServerSocket.Listen(5);
+
+            Thread AcceptThread = new Thread(delegate ()
+            {
+                while (true)
+                {
+                    Socket ClientSocekt = m_ServerSocket.Accept();
+                    Dispatcher.Invoke(() => listConnUser.Items.Add(ClientSocekt.RemoteEndPoint));
+                    // Dispatcher: 메시지큐에 action 함수를 넣어줌 -> 메인쓰레드에서 처리할 수 있도록
+                }
+
+            });
+            AcceptThread.Start();
+
+        }
+        Socket m_ServerSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
     }
 }

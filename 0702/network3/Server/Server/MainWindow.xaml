@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Server"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Server" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ListBox x:Name="listConnUser"></ListBox>
+        <ListBox x:Name="listRecvMsg" Grid.Row="1"></ListBox>
+        <Button x:Name="btnStartServer" Grid.Row="2" Content="서버시작" Click="btnStartServer_Click"></Button>
     </Grid>
 </Window>
